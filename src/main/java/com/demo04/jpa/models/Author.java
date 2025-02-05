@@ -1,7 +1,13 @@
 package com.demo04.jpa.models;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,4 +39,8 @@ public class Author extends BaseEntity {
     private String email;
 
     private int age;
+
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER) // bên bị động
+    @JsonIgnore
+    private List<Course> courses;
 }
